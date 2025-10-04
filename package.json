@@ -2,7 +2,10 @@
   "name": "integrationplaywright",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "all_test": "npx playwright test",
+    "apiTests": "npx playwright test --grep @api"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
