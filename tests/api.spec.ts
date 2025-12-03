@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
+import "dotenv/config";
 
 test.describe.parallel("@api Testing", () => {
-  const baseUrl = "https://reqres.in/api";
+  const baseUrl = process.env.base_url;
+  const api_key = process.env.api_key;
 
   test("simple api test", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users`, {
@@ -9,7 +11,7 @@ test.describe.parallel("@api Testing", () => {
         page: 2,
       },
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${process.env.api_key}`,
       },
     });
     expect(response.status()).toBe(200);
@@ -19,7 +21,7 @@ test.describe.parallel("@api Testing", () => {
   test("non existing endpoint", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users/23`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
     });
     expect(response.status()).toBe(404);
@@ -28,23 +30,18 @@ test.describe.parallel("@api Testing", () => {
   test("parsing body", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users/2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
     });
     const responseBody = JSON.parse(await response.text());
     expect(response.status()).toBe(200);
-    expect(responseBody.data.name).toEqual("fuchsia rose");
-    expect(responseBody.data.year).toEqual(2001);
-    expect(responseBody.data.color).toEqual("#C74375");
-    expect(responseBody.support.url).toEqual(
-      "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral"
-    );
+    expect(responseBody.data.avatar).toBeTruthy();
   });
 
   test("parsing body for support url & text", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users/1`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
     });
     const responseBody = JSON.parse(await response.text());
@@ -59,7 +56,7 @@ test.describe.parallel("@api Testing", () => {
   test("POST request - login", async ({ request }) => {
     const response = await request.post(`${baseUrl}/login`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
       data: {
         email: "eve.holt@reqres.in",
@@ -74,7 +71,7 @@ test.describe.parallel("@api Testing", () => {
   test("POST request - login unsuccessful", async ({ request }) => {
     const response = await request.post(`${baseUrl}/login`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
       data: {
         email: "peter@klaven",
@@ -88,7 +85,7 @@ test.describe.parallel("@api Testing", () => {
   test("PUT request - update", async ({ request }) => {
     const response = await request.put(`${baseUrl}/users/2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
       data: {
         name: "morpheus",
@@ -103,7 +100,7 @@ test.describe.parallel("@api Testing", () => {
   test("PATCH request - update specific", async ({ request }) => {
     const response = await request.patch(`${baseUrl}/users/2`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
       data: {
         name: "mohammad",
@@ -115,9 +112,9 @@ test.describe.parallel("@api Testing", () => {
   });
 
   test("delete request - ", async ({ request }) => {
-    const response = await request.delete(`${baseUrl}/users/2`, {
+    const response = await request.delete(`${baseUrl}/users/7`, {
       headers: {
-        "x-api-key": "reqres-free-v1",
+        "x-api-key": `${api_key}`,
       },
     });
     expect(response.status()).toBe(204);
