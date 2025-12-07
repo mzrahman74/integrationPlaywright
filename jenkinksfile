@@ -1,6 +1,20 @@
 pipeline {
     agent any
 
+    pipeline {
+  agent any
+  environment {
+    api_key = credentials(process.env.api_key)
+    base_url = process.env.base_url
+  }
+  stages {
+    stage('Run API Tests') {
+      steps {
+        sh 'npx playwright test --grep @api'
+      }
+    }
+  }
+}
     parameters {
         choice(
             name: 'Script',
