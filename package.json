@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "npm install",
     "webTest": "npx playwright test --grep @web",
     "apiTest": "npx playwright test --grep @api",
     "mobileView": "npx playwright test tests/web.spec.ts --config playwright.configone.ts"

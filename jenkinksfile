@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'Script',
+            choices: ['build', 'apiTest', "webTest", "mobileView"],
+            description: 'Which npm script to run'
+        )
+    }
+
+    tools {
+        nodejs 'NodeJS_18'   // Name of NodeJS installation configured in Jenkins Global Tool Config
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Script') {
+            steps {
+                sh "npm run ${params.Script}"
+            }
+        }
+
+        stage('Archive Results') {
+            steps {
+                archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline finished successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Check logs for details."
+        }
+    }
+}
