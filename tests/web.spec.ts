@@ -43,7 +43,7 @@ test("verify qrCode in about page", async ({ page }) => {
   });
   if (viewportSize.width <= 991) {
     await page.locator(".navbar-toggler-icon").click();
-    await page.locator('a[href="/about]').click();
+    await page.locator('a[href="/about"]').click();
   } else {
     await page.locator('a[href="/about"]').click();
   }

@@ -42,7 +42,7 @@ export default defineConfig({
     {
       name: "Mobile Chrome",
       use: {
-        headless: false,
+        headless: true,
         screenshot: "only-on-failure",
         video: "retain-on-failure",
         trace: "retain-on-failure",
@@ -52,19 +52,19 @@ export default defineConfig({
       },
       fullyParallel: true,
     },
-    {
-      name: "Mobile Safari",
-      use: {
-        headless: false,
-        screenshot: "only-on-failure",
-        video: "retain-on-failure",
-        trace: "retain-on-failure",
-        ignoreHTTPSErrors: true,
-        permissions: ["geolocation"],
-        ...devices["iPhone 12"],
-      },
-      fullyParallel: true,
-    },
+    // {
+    //   name: "Mobile Safari",
+    //   use: {
+    //     headless: false,
+    //     screenshot: "only-on-failure",
+    //     video: "retain-on-failure",
+    //     trace: "retain-on-failure",
+    //     ignoreHTTPSErrors: true,
+    //     permissions: ["geolocation"],
+    //     ...devices["iPhone 12"],
+    //   },
+    //   fullyParallel: true,
+    // },
     // {
     //   name: "firefox",
     //   use: {
