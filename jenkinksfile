@@ -4,14 +4,22 @@ pipeline {
     parameters {
         choice(
             name: 'Script',
-            choices: ['build', 'apiTest', "webTest", "mobileView"],
+            choices: ['build', 'apiTest', "webTest", "mobileTest"],
             description: 'Which npm script to run'
         )
     }
 
-    tools {
-        nodejs 'NodeJS_18'   // Name of NodeJS installation configured in Jenkins Global Tool Config
+   stage('Run Script') {
+    steps {
+        sh '''
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 22
+      
+        '''
     }
+}
+
 
     stages {
         stage('Install Dependencies') {
