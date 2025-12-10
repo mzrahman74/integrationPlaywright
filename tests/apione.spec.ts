@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import "dotenv/config";
 
-test.describe.parallel("Api Testing", () => {
+test.describe.parallel("@api Api Testing", () => {
   const baseUrl = process.env.base_url;
   const api_key = process.env.api_key;
 
