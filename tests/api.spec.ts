@@ -11,7 +11,7 @@ test.describe.parallel("@api Testing", () => {
         page: 2,
       },
       headers: {
-        "x-api-key": `${process.env.api_key}`,
+        "x-api-key": `${api_key}`,
       },
     });
     expect(response.status()).toBe(200);
