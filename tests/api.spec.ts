@@ -119,4 +119,23 @@ test.describe.parallel("@api Testing", () => {
     });
     expect(response.status()).toBe(204);
   });
+
+  test("get request for user 5", async ({ request }) => {
+    const response = await request.get(`${baseUrl}/users/5`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.data.id).toBe(5);
+    expect(responseBody._meta.upgrade_url).toBe(
+      "https://app.reqres.in/upgrade"
+    );
+    expect(responseBody._meta.features[1]).toBe("Custom API Endpoints");
+    expect(responseBody._meta.features[3]).toBe("Real-time Analytics");
+    expect(responseBody._meta.upgrade_cta).toBe(
+      "Upgrade to Pro for unlimited requests, custom endpoints, and data persistence"
+    );
+  });
 });
