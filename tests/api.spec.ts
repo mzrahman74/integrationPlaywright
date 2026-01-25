@@ -46,10 +46,10 @@ test.describe.parallel("@api Testing", () => {
     });
     const responseBody = JSON.parse(await response.text());
     expect(responseBody.support.url).toEqual(
-      "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral"
+      "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral",
     );
     expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you."
+      "Tired of writing endless social media content? Let Content Caddy generate it for you.",
     );
   });
 
@@ -130,12 +130,12 @@ test.describe.parallel("@api Testing", () => {
     expect(response.status()).toBe(200);
     expect(responseBody.data.id).toBe(5);
     expect(responseBody._meta.upgrade_url).toBe(
-      "https://app.reqres.in/upgrade"
+      "https://app.reqres.in/upgrade",
     );
-    expect(responseBody._meta.features[1]).toBe("Custom API Endpoints");
-    expect(responseBody._meta.features[3]).toBe("Real-time Analytics");
-    expect(responseBody._meta.upgrade_cta).toBe(
-      "Upgrade to Pro for unlimited requests, custom endpoints, and data persistence"
+    expect(responseBody._meta.variant).toBe("v1_a");
+    expect(responseBody._meta.message).toBe(
+      "Classic ReqRes still works. Projects add persistence, auth, and logs.",
     );
+    expect(responseBody._meta.cta.label).toBe("See example app");
   });
 });
