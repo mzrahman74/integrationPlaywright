@@ -138,4 +138,14 @@ test.describe.parallel("@api Testing", () => {
     );
     expect(responseBody._meta.cta.label).toBe("See example app");
   });
+  test("get request for user 23 - non existing user", async ({ request }) => {
+    const response = await request.get(`${baseUrl}/users/23`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(404);
+    expect(responseBody).toEqual({});
+  });
 });
