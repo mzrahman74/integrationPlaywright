@@ -46,10 +46,10 @@ test.describe.parallel("@api Testing", () => {
     });
     const responseBody = JSON.parse(await response.text());
     expect(responseBody.support.url).toEqual(
-      "https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+      "https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=json&utm_campaign=referral",
     );
     expect(responseBody.support.text).toEqual(
-      "Tired of writing endless social media content? Let Content Caddy generate it for you.",
+      "Become a better CTO. A playbook of painful stories and practical advice from a two-time startup CTO.",
     );
   });
 
@@ -134,7 +134,7 @@ test.describe.parallel("@api Testing", () => {
     );
     expect(responseBody._meta.variant).toBe("v1_a");
     expect(responseBody._meta.message).toBe(
-      "Classic ReqRes still works. Projects add persistence, auth, and logs.",
+      "Your data persists here. Add auth, logs, and custom schemas to build a real backend.",
     );
     expect(responseBody._meta.cta.label).toBe("See example app");
   });
