@@ -148,4 +148,22 @@ test.describe.parallel("@api Testing", () => {
     expect(response.status()).toBe(404);
     expect(responseBody).toEqual({});
   });
+  test("get call for the user 24", async ({ request }) => {
+    const response = await request.get(`${baseUrl}/users/8`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.data.id).toBe(8);
+    expect(responseBody._meta.upgrade_url).toBe(
+      "https://app.reqres.in/upgrade",
+    );
+    expect(responseBody._meta.variant).toBe("v1_a");
+    expect(responseBody._meta.message).toBe(
+      "Your data persists here. Add auth, logs, and custom schemas to build a real backend.",
+    );
+    expect(responseBody._meta.cta.label).toBe("See example app");
+  });
 });
