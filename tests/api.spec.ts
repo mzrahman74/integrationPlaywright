@@ -8,7 +8,7 @@ test.describe.parallel("@api Testing", () => {
   test("simple api test", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users`, {
       params: {
-        page: 2,
+        page: 1,
       },
       headers: {
         "x-api-key": `${api_key}`,
@@ -16,6 +16,7 @@ test.describe.parallel("@api Testing", () => {
     });
     expect(response.status()).toBe(200);
     const responseBody = JSON.parse(await response.text());
+    console.log(responseBody);
   });
 
   test("non existing endpoint", async ({ request }) => {

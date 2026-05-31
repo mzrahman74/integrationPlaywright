@@ -87,4 +87,34 @@ test.describe.parallel("@api Api Testing", () => {
     const responseBody = JSON.parse(await response.text());
     expect(responseBody.updatedAt).toBeTruthy();
   });
+  test("{PATCH request - modification", async ({ request }) => {
+    const response = await request.patch(`${baseUrl}/user/2`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+      data: {
+        name: "Yusuf Rahman",
+      },
+    });
+    expect(response.status()).toBe(200);
+    const responseBody = JSON.parse(await response.text());
+    expect(responseBody.updatedAt).toBeTruthy();
+  });
+  test("{GET request - get user", async ({ request }) => {
+    const response = await request.get(`${baseUrl}/user`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+    });
+    expect(response.status()).toBe(200);
+    const responseBody = JSON.parse(await response.text());
+  });
+  test("{DELETE request - deletion", async ({ request }) => {
+    const response = await request.delete(`${baseUrl}/user/10`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+    });
+    expect(response.status()).toBe(204);
+  });
 });
