@@ -54,4 +54,27 @@ test.describe.parallel("@js api Testing", () => {
       "Yusuf Rahman is a software engineer and a playwright automation tester. He has been working in the field of software testing for over 5 years and has extensive experience in using Playwright for end-to-end testing of web applications. In this article, he shares his insights on how to effectively use Playwright for testing web applications.",
     );
   });
+  test("DELETE api posts", async ({ request }) => {
+    const response = await request.delete(`${jsUrl}/posts/1`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+  });
+  test("GET api comments  by postId", async ({ request }) => {
+    const response = await request.get(`${jsUrl}/comments`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {
+        postId: 1,
+      },
+    });
+
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.length).toBe(5);
+  });
 });
