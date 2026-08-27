@@ -4,6 +4,7 @@ import "dotenv/config";
 test.describe.parallel("@api Testing", () => {
   const baseUrl = process.env.base_url;
   const api_key = process.env.api_key;
+  const password = process.env.password;
 
   test("simple api test", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users`, {
@@ -61,7 +62,7 @@ test.describe.parallel("@api Testing", () => {
       },
       data: {
         email: "eve.holt@reqres.in",
-        password: "cityslicka",
+        password: `${password}`,
       },
     });
     const responseBody = JSON.parse(await response.text());
@@ -179,5 +180,20 @@ test.describe.parallel("@api Testing", () => {
     expect(responseBody._meta.upgrade_url).toBe(
       "https://app.reqres.in/upgrade",
     );
+  });
+  test("create new user", async ({ request }) => {
+    const response = await request.post(`${baseUrl}/users`, {
+      headers: {
+        "x-api-key": `${api_key}`,
+      },
+      data: {
+        email: "mohammad.rahman@reqres.in",
+        password: `${password}`,
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(201);
+    expect(responseBody.id).toBeTruthy();
+    expect(responseBody._meta.powered_by).toBe("ReqRes");
   });
 });
