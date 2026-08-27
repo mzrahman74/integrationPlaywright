@@ -4,6 +4,7 @@ import "dotenv/config";
 test.describe.parallel("@api Api Testing", () => {
   const baseUrl = process.env.base_url;
   const api_key = process.env.api_key;
+  const password = process.env.password;
 
   test("list resource", async ({ request }) => {
     const response = await request.get(`${baseUrl}/unknown`, {
@@ -49,7 +50,7 @@ test.describe.parallel("@api Api Testing", () => {
       },
       data: {
         email: "eve.holt@reqres.in",
-        password: "pistol",
+        password: `${password}`,
       },
     });
     expect(response.status()).toBe(200);
