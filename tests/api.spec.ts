@@ -4,7 +4,8 @@ import "dotenv/config";
 test.describe.parallel("@api Testing", () => {
   const baseUrl = process.env.base_url;
   const api_key = process.env.api_key;
-  const password = process.env.password;
+  const password = process.env.password ?? "";
+  const masked = password ? password.replace(/./g, "*") : "(no password found)";
 
   test("simple api test", async ({ request }) => {
     const response = await request.get(`${baseUrl}/users`, {
@@ -62,7 +63,7 @@ test.describe.parallel("@api Testing", () => {
       },
       data: {
         email: "eve.holt@reqres.in",
-        password: `${password}`,
+        password: masked,
       },
     });
     const responseBody = JSON.parse(await response.text());
@@ -188,7 +189,7 @@ test.describe.parallel("@api Testing", () => {
       },
       data: {
         email: "mohammad.rahman@reqres.in",
-        password: `${password}`,
+        password: masked,
       },
     });
     const responseBody = JSON.parse(await response.text());
