@@ -56,6 +56,19 @@ test.describe.parallel("@js api Testing", () => {
     expect(responseBody.title).toBe(title);
     expect(responseBody.body).toBe(body);
   });
+  test("PATCH api posts", async ({ request }) => {
+    const response = await request.patch(`${jsUrl}/posts/1`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        title: title,
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.title).toBe(title);
+  });
   test("DELETE api posts", async ({ request }) => {
     const response = await request.delete(`${jsUrl}/posts/1`, {
       headers: {
@@ -78,5 +91,15 @@ test.describe.parallel("@js api Testing", () => {
     const responseBody = JSON.parse(await response.text());
     expect(response.status()).toBe(200);
     expect(responseBody.length).toBe(5);
+  });
+  test("GET api response for albums endpoint", async ({ request }) => {
+    const response = await request.get(`${jsUrl}/albums`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.length).toBe(100);
   });
 });
