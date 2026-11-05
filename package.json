@@ -6,6 +6,7 @@
     "build": "npm install",
     "webTest": "npx playwright test --grep @web",
     "apiTest": "npx playwright test --grep @api",
+    "jsTest": "npx playwright test --grep @js",
     "mobileView": "npx playwright test tests/web.spec.ts --config playwright.configone.ts"
   },
   "keywords": [],
