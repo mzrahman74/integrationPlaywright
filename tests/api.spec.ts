@@ -48,9 +48,7 @@ test.describe.parallel("@api Testing", () => {
       },
     });
     const responseBody = JSON.parse(await response.text());
-    expect(responseBody.support.url).toEqual(
-      "https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=json&utm_campaign=referral",
-    );
+    expect(responseBody.support.url).toEqual("https://reqres.in/go/posthog");
     expect(responseBody.support.text).toEqual(
       "Become a better CTO. A playbook of painful stories and practical advice from a two-time startup CTO.",
     );

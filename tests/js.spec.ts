@@ -102,4 +102,15 @@ test.describe.parallel("@js api Testing", () => {
     expect(response.status()).toBe(200);
     expect(responseBody.length).toBe(100);
   });
+  test("GET api response for todos endpoint", async ({ request }) => {
+    const response = await request.get(`${jsUrl}/todos`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.length).toBe(200);
+    expect(responseBody[67].id).toBe(68);
+  });
 });
