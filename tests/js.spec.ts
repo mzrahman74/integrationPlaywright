@@ -113,4 +113,15 @@ test.describe.parallel("@js api Testing", () => {
     expect(responseBody.length).toBe(200);
     expect(responseBody[67].id).toBe(68);
   });
+  test("GET api response for users endpoint", async ({ request }) => {
+    const response = await request.get(`${jsUrl}/users`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    expect(response.status()).toBe(200);
+    expect(responseBody.length).toBe(10);
+    expect(responseBody[1].address.city).toBe("Wisokyburgh");
+  });
 });
